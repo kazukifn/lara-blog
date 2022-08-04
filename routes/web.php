@@ -14,11 +14,8 @@ use App\Http\Controllers\Admin\LoginController as authLogin;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::prefix('admin')->group(function () {
-    Route::get('/login', [authLogin::class, 'login']);
-    Route::post('/authenticate', [authLogin::class. 'authenticate'])->name('admin_auth');
-});
+Route::get('/login', [authLogin::class, 'login'])->name('login');
+Route::post('/login', [authLogin::class, 'authenticate']);
+Route::view('/', 'welcome')->name('home')->middleware('auth');
+Route::post('/logout', [authLogin::class, 'logout'])->name('logout');

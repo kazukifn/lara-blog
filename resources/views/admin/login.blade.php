@@ -9,14 +9,23 @@
 </head>
 
 <body>
-    <form action="{{ route('admin_auth') }}" method="post">
+    <form method="POST" action="/login">
         @csrf
         <label for="">EMAIL</label>
-        <input type="text" placeholder="email">
+        <input name="email" type="text" placeholder="email">
         <label for="">PASSWORD</label>
-        <input type="text" placeholeder="password">
+        <input name="password" type="text" placeholeder="password">
         <button type="submit">送信</button>
     </form>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </body>
 
 </html>
